@@ -32,3 +32,18 @@ app.listen(3000,()=>
 
 app.use("/api/user",userRouter);
 app.use('/api/auth',authRouter);
+
+app.use((err,req,res,next)=>
+{
+
+  const stausCode=err.sttusCode ||500;
+  const message=err.message|| 'Internal Serveer Error';
+
+  return res.status(stausCode).json({
+    message:false,
+    stausCode:stausCode,
+    message,
+
+  });
+  
+})
